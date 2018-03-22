@@ -1,0 +1,13 @@
+geoserver:
+  url: "http://localhost:8080/geoserver/rest"
+  user: "admin"
+  password: "geoserver"
+
+# RestClient: 
+restclient:
+  # Set to false to disable or stdout/stderr or 'filename.out'
+  logfile: 'rgeoserver.log' #stdout
+  # Timeout (in seconds)
+  timeout: 300
+  # Open Timeout (in seconds)
+  open_timeout: 60
