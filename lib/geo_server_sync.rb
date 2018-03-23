@@ -10,6 +10,7 @@ module GeoServerSync
   require "geo_server_sync/connection"
   require "geo_server_sync/coverage"
   require "geo_server_sync/coverage_store"
+  require "geo_server_sync/data_store"
   require "geo_server_sync/version"
   require "geo_server_sync/workspace"
 

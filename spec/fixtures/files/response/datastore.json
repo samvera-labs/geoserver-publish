@@ -1,0 +1,33 @@
+{
+  "dataStore": {
+    "name": "13011278-2dba-4fb1-93d5-0685a345a34a",
+    "type": "Shapefile",
+    "enabled": true,
+    "workspace": {
+      "name": "public",
+      "href": "http://localhost:8080/geoserver/rest/workspaces/public.json"
+    },
+    "connectionParameters": {
+      "entry": [
+        {
+          "@key": "create spatial index",
+          "$": "true"
+        },
+        {
+          "@key": "cache and reuse memory maps",
+          "$": "false"
+        },
+        {
+          "@key": "namespace",
+          "$": "http://public"
+        },
+        {
+          "@key": "url",
+          "$": "file:///opt/geo_derivatives/e8/f4/d7/e8f4d7bf5a4a48d89fe0c4b8d11658e0/display_vector/13011278-2dba-4fb1-93d5-0685a345a34a.shp"
+        }
+      ]
+    },
+    "_default": false,
+    "featureTypes": "http://localhost:8080/geoserver/rest/workspaces/public/datastores/13011278-2dba-4fb1-93d5-0685a345a34a/featuretypes.json"
+  }
+}

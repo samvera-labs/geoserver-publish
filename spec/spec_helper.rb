@@ -19,6 +19,8 @@ require "webmock/rspec"
 
 Dir[Pathname.new("./").join("spec", "support", "**", "*.rb")].sort.each { |file| require_relative file.gsub(/^spec\//, "") }
 
+ROOT_PATH = Pathname.new(Dir.pwd)
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.syntax = :expect

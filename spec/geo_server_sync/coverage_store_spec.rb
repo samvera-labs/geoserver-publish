@@ -29,7 +29,7 @@ RSpec.describe GeoServerSync::CoverageStore do
         stub_geoserver_post(path: path, payload: payload, status: 500)
       end
 
-      it "returns a the properties as a hash" do
+      it "raises an exception" do
         expect { coveragestore_object.create(workspace_name: workspace_name, coverage_store_name: coverage_store_name, url: url) }.to raise_error(GeoServerSync::Error)
       end
     end

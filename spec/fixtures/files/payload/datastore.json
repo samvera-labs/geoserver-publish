@@ -1,0 +1,1 @@
+{"dataStore":{"name":"datastore","connectionParameters":{"entry":[{"@key":"create spatial index","$":"true"},{"@key":"url","$":"file:///shapefile.shp"},{"@key":"cache and reuse memory maps","$":"false"}]}}}
