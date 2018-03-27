@@ -7,7 +7,6 @@ gemspec
 
 group :development, :test do
   gem "bixby", require: false
-  gem "byebug", require: false
   gem "coveralls", require: false
   gem "simplecov", require: false
 end
