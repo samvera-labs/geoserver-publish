@@ -10,10 +10,25 @@ RSpec.describe GeoServerSync::Coverage do
   let(:coverage_store_name) { "teststore" }
   let(:coverage_name) { "testcov" }
   let(:title) { "title" }
+  let(:params) do
+    {
+      workspace_name: workspace_name,
+      coverage_store_name: coverage_store_name,
+      coverage_name: coverage_name
+    }
+  end
 
   describe "#create" do
     let(:path) { "#{base_url}/workspaces/public/coveragestores/teststore/coverages" }
-    let(:payload) { '{"coverage":{"enabled":true,"name":"testcov","title":"title"}}' }
+    let(:payload) { Fixtures.file_fixture("payload/coverage.json").read }
+    let(:params) do
+      {
+        workspace_name: workspace_name,
+        coverage_store_name: coverage_store_name,
+        coverage_name: coverage_name,
+        title: title
+      }
+    end
 
     context "when a coverage is created successfully" do
       before do
@@ -21,10 +36,7 @@ RSpec.describe GeoServerSync::Coverage do
       end
 
       it "returns a true" do
-        expect(coverage_object.create(workspace_name: workspace_name,
-                                      coverage_store_name: coverage_store_name,
-                                      coverage_name: coverage_name,
-                                      title: title)).to be true
+        expect(coverage_object.create(params)).to be true
       end
     end
 
@@ -34,7 +46,7 @@ RSpec.describe GeoServerSync::Coverage do
       end
 
       it "raises an error" do
-        expect { coverage_object.create(workspace_name: workspace_name, coverage_store_name: coverage_store_name, coverage_name: coverage_name, title: title) }.to raise_error(GeoServerSync::Error)
+        expect { coverage_object.create(params) }.to raise_error(GeoServerSync::Error)
       end
     end
   end
@@ -48,7 +60,7 @@ RSpec.describe GeoServerSync::Coverage do
       end
 
       it "makes a delete request and returns true" do
-        expect(coverage_object.delete(workspace_name: workspace_name, coverage_store_name: coverage_store_name, coverage_name: coverage_name)).to be true
+        expect(coverage_object.delete(params)).to be true
       end
     end
 
@@ -60,21 +72,21 @@ RSpec.describe GeoServerSync::Coverage do
       end
 
       it "makes a delete request to geoserver and raises an exception" do
-        expect { coverage_object.delete(workspace_name: workspace_name, coverage_store_name: coverage_store_name, coverage_name: coverage_name) }.to raise_error(GeoServerSync::Error)
+        expect { coverage_object.delete(params) }.to raise_error(GeoServerSync::Error)
       end
     end
   end
 
   describe "#find" do
     context "when a coverage is found" do
-      let(:response) { '{"workspace":{"name":"public","isolated":false}}' }
+      let(:response) { Fixtures.file_fixture("response/coverage.json").read }
 
       before do
         stub_geoserver_get(path: path, response: response, status: 200)
       end
 
       it "returns a the properties as a hash" do
-        expect(coverage_object.find(workspace_name: workspace_name, coverage_store_name: coverage_store_name, coverage_name: coverage_name)).to eq(JSON.parse(response))
+        expect(coverage_object.find(params)).to eq(JSON.parse(response))
       end
     end
 
@@ -85,8 +97,8 @@ RSpec.describe GeoServerSync::Coverage do
         stub_geoserver_get(path: path, response: response, status: 404)
       end
 
-      it "raises an exception" do
-        expect { coverage_object.find(workspace_name: workspace_name, coverage_store_name: coverage_store_name, coverage_name: coverage_name) }.to raise_error(GeoServerSync::Error)
+      it "returns nil" do
+        expect(coverage_object.find(params)).to be_nil
       end
     end
   end

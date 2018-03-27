@@ -21,8 +21,7 @@ module GeoServerSync
         req.url path
         req.headers["Accept"] = "application/json"
       end
-      return response.body if response.status == 200
-      raise GeoServerSync::Error, response.reason_phrase
+      response.body if response.status == 200
     end
 
     def post(path:, payload:)

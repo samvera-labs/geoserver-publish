@@ -15,7 +15,7 @@ module GeoServerSync
     def find(workspace_name:)
       path = workspace_url(workspace_name: workspace_name)
       out = connection.get(path: path)
-      JSON.parse(out)
+      JSON.parse(out) if out
     end
 
     def create(workspace_name:)
@@ -34,8 +34,8 @@ module GeoServerSync
       end
 
       def workspace_url(workspace_name:)
-        final_slash = workspace_name ? "/" : ""
-        "workspaces#{final_slash}#{workspace_name}"
+        last_path_component = workspace_name ? "/#{workspace_name}" : ""
+        "workspaces#{last_path_component}"
       end
   end
 end

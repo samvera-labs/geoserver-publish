@@ -15,7 +15,7 @@ module GeoServerSync
     def find(workspace_name:, coverage_store_name:)
       path = coverage_store_url(workspace_name: workspace_name, coverage_store_name: coverage_store_name)
       out = connection.get(path: path)
-      JSON.parse(out)
+      JSON.parse(out) if out
     end
 
     def create(workspace_name:, coverage_store_name:, url:, type: "GeoTIFF")
@@ -27,8 +27,8 @@ module GeoServerSync
     private
 
       def coverage_store_url(workspace_name:, coverage_store_name:)
-        final_slash = coverage_store_name ? "/" : ""
-        "workspaces/#{workspace_name}/coveragestores#{final_slash}#{coverage_store_name}"
+        last_path_component = coverage_store_name ? "/#{coverage_store_name}" : ""
+        "workspaces/#{workspace_name}/coveragestores#{last_path_component}"
       end
 
       def payload_new(workspace_name:, coverage_store_name:, type:, url:)

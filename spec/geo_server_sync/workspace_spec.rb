@@ -9,24 +9,24 @@ RSpec.describe GeoServerSync::Workspace do
 
   describe "#create" do
     let(:path) { "#{base_url}/workspaces" }
-    let(:payload) { '{"workspace":{"name":"public"}}' }
+    let(:payload) { Fixtures.file_fixture("payload/workspace.json").read }
 
-    context "when a workspace is found" do
+    context "when a workspace is created successfully" do
       before do
         stub_geoserver_post(path: path, payload: payload, status: 201)
       end
 
-      it "returns a the properties as a hash" do
+      it "returns a true" do
         expect(workspace_object.create(workspace_name: workspace_name)).to be true
       end
     end
 
-    context "when a workspace is not found" do
+    context "when a workspace is not created successfully" do
       before do
         stub_geoserver_post(path: path, payload: payload, status: 500)
       end
 
-      it "returns a the properties as a hash" do
+      it "raises an error" do
         expect { workspace_object.create(workspace_name: workspace_name) }.to raise_error(GeoServerSync::Error)
       end
     end
@@ -60,7 +60,7 @@ RSpec.describe GeoServerSync::Workspace do
 
   describe "#find" do
     context "when a workspace is found" do
-      let(:response) { '{"workspace":{"name":"public","isolated":false}}' }
+      let(:response) { Fixtures.file_fixture("response/workspace.json").read }
 
       before do
         stub_geoserver_get(path: path, response: response, status: 200)
@@ -78,8 +78,8 @@ RSpec.describe GeoServerSync::Workspace do
         stub_geoserver_get(path: path, response: response, status: 404)
       end
 
-      it "raises an exception" do
-        expect { workspace_object.find(workspace_name: workspace_name) }.to raise_error(GeoServerSync::Error)
+      it "returns nil" do
+        expect(workspace_object.find(workspace_name: workspace_name)).to be_nil
       end
     end
   end

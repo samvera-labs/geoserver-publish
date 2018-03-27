@@ -15,7 +15,7 @@ module GeoServerSync
     def find(workspace_name:, data_store_name:)
       path = data_store_url(workspace_name: workspace_name, data_store_name: data_store_name)
       out = connection.get(path: path)
-      JSON.parse(out)
+      JSON.parse(out) if out
     end
 
     def create(workspace_name:, data_store_name:, url:)

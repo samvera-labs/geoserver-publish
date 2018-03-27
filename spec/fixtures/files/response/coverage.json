@@ -1,0 +1,50 @@
+{
+  "coverage": {
+    "name": "c2d14b8-0563c4a18b8a-2d0ae0d91-8b66",
+    "nativeName": "c2d14b8-0563c4a18b8a-2d0ae0d91-8b66",
+    "namespace": {
+      "name": "public",
+      "href": "http://localhost:8080/geoserver/rest/namespaces/public.json"
+    },
+    "title": "Test GeoTiff",
+    "nativeCRS": "GEOGCS[\"WGS 84\", \n  DATUM[\"World Geodetic System 1984\", \n    SPHEROID[\"WGS 84\", 6378137.0, 298.257223563, AUTHORITY[\"EPSG\",\"7030\"]], \n    AUTHORITY[\"EPSG\",\"6326\"]], \n  PRIMEM[\"Greenwich\", 0.0, AUTHORITY[\"EPSG\",\"8901\"]], \n  UNIT[\"degree\", 0.017453292519943295], \n  AXIS[\"Geodetic longitude\", EAST], \n  AXIS[\"Geodetic latitude\", NORTH], \n  AUTHORITY[\"EPSG\",\"4326\"]]",
+    "srs": "EPSG:4326",
+    "nativeBoundingBox": {
+      "minx": -74.43197445114977,
+      "maxx": -74.39425100111902,
+      "miny": 42.08868620968453,
+      "maxy": 42.11282052065522,
+      "crs": "EPSG:4326"
+    },
+    "latLonBoundingBox": {
+      "minx": -74.43197445114977,
+      "maxx": -74.39425100111902,
+      "miny": 42.08868620968453,
+      "maxy": 42.11282052065522,
+      "crs": "EPSG:4326"
+    },
+    "projectionPolicy": "REPROJECT_TO_DECLARED",
+    "enabled": true,
+    "store": {
+      "@class": "coverageStore",
+      "name": "public:c2d14b8-0563c4a18b8a-2d0ae0d91-8b66",
+      "href": "http://localhost:8080/geoserver/rest/workspaces/public/coveragestores/c2d14b8-0563c4a18b8a-2d0ae0d91-8b66.json"
+    },
+    "grid": {
+      "@dimension": "2",
+      "range": {
+        "low": "0 0",
+        "high": "347 222"
+      },
+      "transform": {
+        "scaleX": 0.00010871311248056577,
+        "scaleY": -0.00010871311248056577,
+        "shearX": 0,
+        "shearY": 0,
+        "translateX": -74.43192009459354,
+        "translateY": 42.11276616409898
+      },
+      "crs": "EPSG:4326"
+    }
+  }
+}

@@ -1,5 +1,7 @@
 # GeoServerSync
 
+Simple client for publishing Shapefiles and GeoTIFFs to Geoserver in bulk. Made for use with geospatial data repositories.
+
 ## Installation
 
 Add this line to your application's Gemfile:

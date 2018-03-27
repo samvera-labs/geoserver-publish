@@ -61,8 +61,8 @@ RSpec.describe GeoServerSync::Connection do
         stub_geoserver_get(path: path, response: response, status: 404)
       end
 
-      it "makes a get request to geoserver and raises an exception" do
-        expect { connection.get(path: path) }.to raise_error(GeoServerSync::Error)
+      it "makes a get request to geoserver and returns nil" do
+        expect(connection.get(path: path)).to be_nil
       end
     end
   end

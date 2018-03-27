@@ -1,0 +1,14 @@
+{
+  "coverageStore": {
+    "name": "c2d14b8-0563c4a18b8a-2d0ae0d91-8b66",
+    "type": "GeoTIFF",
+    "enabled": true,
+    "workspace": {
+      "name": "public",
+      "href": "http://localhost:8080/geoserver/rest/workspaces/public.json"
+    },
+    "_default": false,
+    "url": "file:///opt/geo_derivatives/c2/d1/4b/c2d14b80563c4a18b8a2d0ae0d918b66/display_raster.tif",
+    "coverages": "http://localhost:8080/geoserver/rest/workspaces/public/coveragestores/c2d14b8-0563c4a18b8a-2d0ae0d91-8b66/coverages.json"
+  }
+}

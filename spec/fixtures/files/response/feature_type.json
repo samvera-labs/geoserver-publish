@@ -1,0 +1,79 @@
+{
+  "featureType": {
+    "name": "13011278-2dba-4fb1-93d5-0685a345a34a",
+    "nativeName": "13011278-2dba-4fb1-93d5-0685a345a34a",
+    "namespace": {
+      "name": "public",
+      "href": "http://localhost:8080/geoserver/rest/namespaces/public.json"
+    },
+    "title": "Test",
+    "keywords": {
+      "string": [
+        "features",
+        "13011278-2dba-4fb1-93d5-0685a345a34a"
+      ]
+    },
+    "srs": "EPSG:4326",
+    "nativeBoundingBox": {
+      "minx": -74.9431,
+      "maxx": -74.483,
+      "miny": 40.1385,
+      "maxy": 40.4234,
+      "crs": "EPSG:4326"
+    },
+    "latLonBoundingBox": {
+      "minx": -74.9431,
+      "maxx": -74.483,
+      "miny": 40.1385,
+      "maxy": 40.4234,
+      "crs": "EPSG:4326"
+    },
+    "projectionPolicy": "FORCE_DECLARED",
+    "enabled": true,
+    "store": {
+      "@class": "dataStore",
+      "name": "public:testdatastore",
+      "href": "http://localhost:8080/geoserver/rest/workspaces/public/datastores/testdatastore.json"
+    },
+    "maxFeatures": 0,
+    "numDecimals": 0,
+    "overridingServiceSRS": false,
+    "skipNumberMatched": false,
+    "circularArcPresent": false,
+    "attributes": {
+      "attribute": [
+        {
+          "name": "the_geom",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "nillable": true,
+          "binding": "com.vividsolutions.jts.geom.MultiPolygon"
+        },
+        {
+          "name": "kind",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "nillable": true,
+          "binding": "java.lang.String",
+          "length": 80
+        },
+        {
+          "name": "name",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "nillable": true,
+          "binding": "java.lang.String",
+          "length": 80
+        },
+        {
+          "name": "state",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "nillable": true,
+          "binding": "java.lang.String",
+          "length": 80
+        }
+      ]
+    }
+  }
+}
