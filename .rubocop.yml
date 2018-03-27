@@ -9,5 +9,9 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
     - '*.gemspec'
+Naming/FileName:
+  Exclude: 
+    - "geoserver-publish.gemspec"
+    - "Gemfile"
 Style/StringLiterals:
   EnforcedStyle: double_quotes

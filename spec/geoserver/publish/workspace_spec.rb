@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "spec_helper"
 
-RSpec.describe GeoServerSync::Workspace do
+RSpec.describe Geoserver::Publish::Workspace do
   subject(:workspace_object) { described_class.new }
   let(:base_url) { "http://localhost:8080/geoserver/rest" }
   let(:path) { "#{base_url}/workspaces/#{workspace_name}" }
@@ -27,7 +27,7 @@ RSpec.describe GeoServerSync::Workspace do
       end
 
       it "raises an error" do
-        expect { workspace_object.create(workspace_name: workspace_name) }.to raise_error(GeoServerSync::Error)
+        expect { workspace_object.create(workspace_name: workspace_name) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
@@ -53,7 +53,7 @@ RSpec.describe GeoServerSync::Workspace do
       end
 
       it "makes a delete request to geoserver and raises an exception" do
-        expect { workspace_object.delete(workspace_name: workspace_name) }.to raise_error(GeoServerSync::Error)
+        expect { workspace_object.delete(workspace_name: workspace_name) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end

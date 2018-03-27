@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "spec_helper"
 
-RSpec.describe GeoServerSync::Coverage do
+RSpec.describe Geoserver::Publish::Coverage do
   subject(:coverage_object) { described_class.new }
 
   let(:base_url) { "http://localhost:8080/geoserver/rest" }
@@ -46,7 +46,7 @@ RSpec.describe GeoServerSync::Coverage do
       end
 
       it "raises an error" do
-        expect { coverage_object.create(params) }.to raise_error(GeoServerSync::Error)
+        expect { coverage_object.create(params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
@@ -72,7 +72,7 @@ RSpec.describe GeoServerSync::Coverage do
       end
 
       it "makes a delete request to geoserver and raises an exception" do
-        expect { coverage_object.delete(params) }.to raise_error(GeoServerSync::Error)
+        expect { coverage_object.delete(params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "spec_helper"
 
-RSpec.describe GeoServerSync::Connection do
+RSpec.describe Geoserver::Publish::Connection do
   subject(:connection) { described_class.new(config) }
 
   let(:base_url) { "http://localhost:8080/geoserver/rest" }
@@ -35,7 +35,7 @@ RSpec.describe GeoServerSync::Connection do
       end
 
       it "makes a delete request to geoserver and raises an exception" do
-        expect { connection.delete(path: path) }.to raise_error(GeoServerSync::Error)
+        expect { connection.delete(path: path) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
@@ -97,7 +97,7 @@ RSpec.describe GeoServerSync::Connection do
       end
 
       it "makes a post request to geoserver and raises an exception" do
-        expect { connection.post(path: path, payload: payload) }.to raise_error(GeoServerSync::Error)
+        expect { connection.post(path: path, payload: payload) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end

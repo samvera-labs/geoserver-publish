@@ -1,52 +1,49 @@
 # frozen_string_literal: true
 require "spec_helper"
 
-RSpec.describe GeoServerSync::FeatureType do
-  subject(:feature_type_object) { described_class.new }
+RSpec.describe Geoserver::Publish::DataStore do
+  subject(:datastore_object) { described_class.new }
 
   let(:base_url) { "http://localhost:8080/geoserver/rest" }
-  let(:path) { "#{base_url}/workspaces/#{workspace_name}/datastores/#{data_store_name}/featuretypes/#{feature_type_name}" }
+  let(:path) { "#{base_url}/workspaces/#{workspace_name}/datastores/#{data_store_name}" }
   let(:workspace_name) { "public" }
-  let(:data_store_name) { "teststore" }
-  let(:feature_type_name) { "testfeaturetype" }
-  let(:title) { "title" }
+  let(:data_store_name) { "datastore" }
+  let(:url) { "file:///shapefile.shp" }
   let(:params) do
     {
       workspace_name: workspace_name,
-      data_store_name: data_store_name,
-      feature_type_name: feature_type_name
+      data_store_name: data_store_name
     }
   end
 
   describe "#create" do
-    let(:path) { "#{base_url}/workspaces/public/datastores/teststore/featuretypes" }
-    let(:payload) { Fixtures.file_fixture("payload/feature_type.json").read }
+    let(:path) { "#{base_url}/workspaces/public/datastores" }
+    let(:payload) { Fixtures.file_fixture("payload/datastore.json").read }
     let(:params) do
       {
         workspace_name: workspace_name,
         data_store_name: data_store_name,
-        feature_type_name: feature_type_name,
-        title: title
+        url: url
       }
     end
 
-    context "when a feature_type is created successfully" do
+    context "when a datastore is created successfully" do
       before do
         stub_geoserver_post(path: path, payload: payload, status: 201)
       end
 
-      it "returns a true" do
-        expect(feature_type_object.create(params)).to be true
+      it "returns a the properties as a hash" do
+        expect(datastore_object.create(params)).to be true
       end
     end
 
-    context "when a feature_type is not created successfully" do
+    context "when a datastore is not created successfully" do
       before do
         stub_geoserver_post(path: path, payload: payload, status: 500)
       end
 
       it "raises an exception" do
-        expect { feature_type_object.create(params) }.to raise_error(GeoServerSync::Error)
+        expect { datastore_object.create(params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
@@ -60,7 +57,7 @@ RSpec.describe GeoServerSync::FeatureType do
       end
 
       it "makes a delete request and returns true" do
-        expect(feature_type_object.delete(params)).to be true
+        expect(datastore_object.delete(params)).to be true
       end
     end
 
@@ -72,25 +69,25 @@ RSpec.describe GeoServerSync::FeatureType do
       end
 
       it "makes a delete request to geoserver and raises an exception" do
-        expect { feature_type_object.delete(params) }.to raise_error(GeoServerSync::Error)
+        expect { datastore_object.delete(params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
 
   describe "#find" do
-    context "when a feature_type is found" do
-      let(:response) { Fixtures.file_fixture("response/feature_type.json").read }
+    context "when a datastore is found" do
+      let(:response) { Fixtures.file_fixture("response/datastore.json").read }
 
       before do
         stub_geoserver_get(path: path, response: response, status: 200)
       end
 
       it "returns a the properties as a hash" do
-        expect(feature_type_object.find(params)).to eq(JSON.parse(response))
+        expect(datastore_object.find(params)).to eq(JSON.parse(response))
       end
     end
 
-    context "when a feature_type is not found" do
+    context "when a datastore is not found" do
       let(:response) { "not found" }
 
       before do
@@ -98,7 +95,7 @@ RSpec.describe GeoServerSync::FeatureType do
       end
 
       it "returns nil" do
-        expect(feature_type_object.find(params)).to be_nil
+        expect(datastore_object.find(params)).to be_nil
       end
     end
   end

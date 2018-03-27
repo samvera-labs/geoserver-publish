@@ -2,17 +2,17 @@
 # frozen_string_literal: true
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "geo_server_sync/version"
+require "geoserver/publish/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "geo_server_sync"
-  spec.version       = GeoServerSync::VERSION
+  spec.name          = "geoserver-publish"
+  spec.version       = Geoserver::Publish::VERSION
   spec.authors       = ["Eliot Jordan"]
   spec.email         = ["eliotj@princeton.edu"]
 
-  spec.summary       = "GeoServer sync"
-  spec.description   = "GeoServer sync"
-  spec.homepage      = "https://github.com/pulibrary/geo_server_sync"
+  spec.summary       = "Geoserver::Publish::Publish"
+  spec.description   = "Geoserver::Publish::Publish"
+  spec.homepage      = "https://github.com/pulibrary/geoserver-publish"
   spec.license       = "Apache-2.0"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

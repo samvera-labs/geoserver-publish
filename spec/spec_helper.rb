@@ -14,7 +14,7 @@ end
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 
 require "bundler/setup"
-require "geo_server_sync"
+require "geoserver/publish"
 require "webmock/rspec"
 
 Dir[Pathname.new("./").join("spec", "support", "**", "*.rb")].sort.each { |file| require_relative file.gsub(/^spec\//, "") }
