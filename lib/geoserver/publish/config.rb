@@ -8,7 +8,7 @@ module Geoserver
     private
 
       def config_yaml
-        file_path = File.join(File.dirname(__FILE__), "..", "..", "..", "config", "config.yml")
+        file_path = File.join(Geoserver::Publish.root, "config", "config.yml")
         YAML.safe_load(ERB.new(File.read(file_path)).result, [], [], true)
       end
 
