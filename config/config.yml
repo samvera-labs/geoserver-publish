@@ -1,4 +1,4 @@
 geoserver:
-  url: "http://localhost:8080/geoserver/rest"
-  user: "admin"
-  password: "geoserver"
+  url: <%= ENV['GEOSERVER_URL'] || "http://localhost:8080/geoserver/rest" %>
+  user: <%= ENV['GEOSERVER_USER'] || "admin" %>
+  password: <%= ENV['GEOSERVER_PASSWORD'] || "geoserver" %>

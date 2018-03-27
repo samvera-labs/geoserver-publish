@@ -16,24 +16,28 @@ module Geoserver
     require "geoserver/publish/version"
     require "geoserver/publish/workspace"
 
-    def self.delete_geotiff(workspace_name:, id:)
-      CoverageStore.new.delete(workspace_name: workspace_name, coverage_store_name: id)
+    def self.delete_geotiff(workspace_name:, id:, connection: nil)
+      CoverageStore.new(connection).delete(workspace_name: workspace_name, coverage_store_name: id)
     end
 
-    def self.delete_shapefile(workspace_name:, id:)
-      DataStore.new.delete(workspace_name: workspace_name, data_store_name: id)
+    def self.delete_shapefile(workspace_name:, id:, connection: nil)
+      DataStore.new(connection).delete(workspace_name: workspace_name, data_store_name: id)
     end
 
-    def self.geotiff(workspace_name:, file_path:, id:, title: nil)
-      create_workspace(workspace_name: workspace_name)
-      create_coverage_store(workspace_name: workspace_name, coverage_store_name: id, url: file_path)
-      create_coverage(workspace_name: workspace_name, coverage_store_name: id, coverage_name: id, title: title)
+    def self.geotiff(workspace_name:, file_path:, id:, title: nil, connection: nil)
+      create_workspace(workspace_name: workspace_name, connection: connection)
+      create_coverage_store(workspace_name: workspace_name, coverage_store_name: id, url: file_path, connection: connection)
+      create_coverage(workspace_name: workspace_name, coverage_store_name: id, coverage_name: id, title: title, connection: connection)
     end
 
-    def self.shapefile(workspace_name:, file_path:, id:, title: nil)
-      create_workspace(workspace_name: workspace_name)
-      create_data_store(workspace_name: workspace_name, data_store_name: id, url: file_path)
-      create_feature_type(workspace_name: workspace_name, data_store_name: id, feature_type_name: id, title: title)
+    def self.shapefile(workspace_name:, file_path:, id:, title: nil, connection: nil)
+      create_workspace(workspace_name: workspace_name, connection: connection)
+      create_data_store(workspace_name: workspace_name, data_store_name: id, url: file_path, connection: connection)
+      create_feature_type(workspace_name: workspace_name, data_store_name: id, feature_type_name: id, title: title, connection: connection)
+    end
+
+    def self.root
+      Pathname.new(File.expand_path("../../../", __FILE__))
     end
 
     class Error < StandardError
