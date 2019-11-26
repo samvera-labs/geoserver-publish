@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Simple client for publishing Shapefiles and GeoTIFFs to Geoserver"
   spec.description   = "Simple client for publishing Shapefiles and GeoTIFFs to Geoserver"
-  spec.homepage      = "https://github.com/pulibrary/geoserver-publish"
+  spec.homepage      = "https://github.com/samvera-labs/geoserver-publish"
   spec.license       = "Apache-2.0"
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
