@@ -1,7 +1,7 @@
 # Geoserver::Publish
 
-[![Build Status](https://img.shields.io/travis/pulibrary/geoserver-publish/master.svg)](https://travis-ci.org/pulibrary/geoserver-publish)
-[![Coverage Status](https://img.shields.io/coveralls/pulibrary/geoserver-publish/master.svg)](https://coveralls.io/github/pulibrary/geoserver-publish?branch=master)
+[![Build Status](https://img.shields.io/travis/samvera-labs/geoserver-publish/master.svg)](https://travis-ci.org/samvera-labs/geoserver-publish)
+[![Coverage Status](https://img.shields.io/coveralls/samvera-labs/geoserver-publish/master.svg)](https://coveralls.io/github/samvera-labs/geoserver-publish?branch=master)
 
 Simple client for publishing Shapefiles and GeoTIFFs to Geoserver.
 
@@ -78,4 +78,4 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/pulibrary/geoserver-publish.
+Bug reports and pull requests are welcome on GitHub at https://github.com/samvera-labs/geoserver-publish.
