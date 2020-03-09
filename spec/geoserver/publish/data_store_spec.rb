@@ -99,4 +99,37 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
     end
   end
+  
+  describe "#upload" do
+    let(:path) { "#{base_url}/workspaces/public/datastores/datastore/file.shp" }
+    let(:payload) { Fixtures.file_fixture("payload/antarctica-latest-free.shp.zip").read }
+    let(:content_type) { 'application/zip' }
+    let(:params) do
+      {
+        workspace_name: workspace_name,
+        data_store_name: data_store_name,
+        file: payload
+      }
+    end
+
+    context "when a datastore is created successfully" do
+      before do
+        stub_geoserver_put(path: path, payload: payload, content_type: content_type, status: 200)
+      end
+
+      it "returns a the properties as a hash" do
+         expect(datastore_object.upload(params)).to be true
+      end
+    end
+
+    context "when a datastore is not created successfully" do
+      before do
+        stub_geoserver_put(path: path, payload: payload, content_type: content_type, status: 500)
+      end
+
+      it "raises an exception" do
+        expect { datastore_object.upload(params) }.to raise_error(Geoserver::Publish::Error)
+      end
+    end
+  end
 end

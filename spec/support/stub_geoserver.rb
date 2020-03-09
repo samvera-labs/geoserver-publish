@@ -17,6 +17,12 @@ module GeoserverStubbing
       .with(query: { "recurse" => "true" })
       .to_return(status: status, body: response, headers: {})
   end
+  
+  def stub_geoserver_put(path:, payload:, content_type:, status:)
+    stub_request(:put, path)
+      .with(body: payload, headers: { "Content-Type" => content_type })
+      .to_return(status: status, body: "response", headers: {})
+  end
 end
 
 RSpec.configure do |config|
