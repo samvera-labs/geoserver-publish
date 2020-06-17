@@ -25,11 +25,21 @@ module Geoserver
         connection.post(path: path, payload: payload)
       end
 
+      def upload(workspace_name:, data_store_name:, file:)
+        content_type = 'application/zip'
+        path = upload_url(workspace: workspace_name, data_store: data_store_name)
+        connection.put(path: path, payload: file, content_type: content_type)
+      end
+
       private
 
         def data_store_url(workspace_name:, data_store_name:)
           last_path_component = data_store_name ? "/#{data_store_name}" : ""
           "workspaces/#{workspace_name}/datastores#{last_path_component}"
+        end
+
+        def upload_url(workspace:, data_store:)
+          "workspaces/#{workspace}/datastores/#{data_store}/file.shp"
         end
 
         # rubocop:disable Metrics/MethodLength
