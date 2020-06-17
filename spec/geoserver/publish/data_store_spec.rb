@@ -32,7 +32,7 @@ RSpec.describe Geoserver::Publish::DataStore do
         stub_geoserver_post(path: path, payload: payload, status: 201)
       end
 
-      it "returns a the properties as a hash" do
+      it "returns true" do
         expect(datastore_object.create(params)).to be true
       end
     end
@@ -82,7 +82,7 @@ RSpec.describe Geoserver::Publish::DataStore do
         stub_geoserver_get(path: path, response: response, status: 200)
       end
 
-      it "returns a the properties as a hash" do
+      it "returns the properties as a hash" do
         expect(datastore_object.find(params)).to eq(JSON.parse(response))
       end
     end
@@ -117,7 +117,7 @@ RSpec.describe Geoserver::Publish::DataStore do
         stub_geoserver_put(path: path, payload: payload, content_type: content_type, status: 200)
       end
 
-      it "returns a the properties as a hash" do
+      it "returns true" do
          expect(datastore_object.upload(params)).to be true
       end
     end
