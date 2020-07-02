@@ -27,6 +27,12 @@ module Geoserver
         connection.post(path: path, payload: payload)
       end
 
+      def update(workspace_name:, data_store_name:, feature_type_name:, title:, additional_payload: nil)
+        path = feature_type_url(workspace_name: workspace_name, data_store_name: data_store_name, feature_type_name: feature_type_name)
+        payload = payload_new(feature_type_name: feature_type_name, title: title, payload: additional_payload)
+        connection.put(path: path, payload: payload, content_type: "application/json")
+      end
+
       private
 
         def feature_type_url(workspace_name:, data_store_name:, feature_type_name:)

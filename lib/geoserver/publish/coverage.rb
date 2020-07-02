@@ -25,6 +25,12 @@ module Geoserver
         connection.post(path: path, payload: payload)
       end
 
+      def update(workspace_name:, coverage_store_name:, coverage_name:, title:, additional_payload: nil)
+        path = coverage_url(workspace_name: workspace_name, coverage_store_name: coverage_store_name, coverage_name: coverage_name)
+        payload = payload_new(coverage_name: coverage_name, title: title, payload: additional_payload)
+        connection.put(path: path, payload: payload, content_type: "application/json")
+      end
+
       private
 
         def coverage_url(workspace_name:, coverage_store_name:, coverage_name:)

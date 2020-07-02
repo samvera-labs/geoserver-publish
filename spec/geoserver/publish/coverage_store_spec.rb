@@ -72,6 +72,44 @@ RSpec.describe Geoserver::Publish::CoverageStore do
     end
   end
 
+  describe "#update" do
+    let(:payload) { Fixtures.file_fixture("payload/coveragestore.json").read }
+    let(:params) do
+      {
+        workspace_name: workspace_name,
+        coverage_store_name: coverage_store_name,
+        url: url,
+        additional_payload: {
+          keywords: {
+            "string": ["coverage", "store"]
+          }
+        }
+      }
+    end
+
+    context "with a 200 OK response" do
+      it "makes a put request and returns true" do
+        new_payload = JSON.parse(payload)
+        new_payload["coverageStore"].merge!(params[:additional_payload])
+        stub_geoserver_put(payload: new_payload.to_json, path: path, status: 200, content_type: "application/json")
+
+        expect(coveragestore_object.update(params)).to be true
+      end
+    end
+
+    context "with a 404 not found response" do
+      let(:response) { "not found" }
+
+      it "makes an update request to geoserver and raises an exception" do
+        new_payload = JSON.parse(payload)
+        new_payload["coverageStore"].merge!(params[:additional_payload])
+        stub_geoserver_put(payload: new_payload.to_json, path: path, status: 404, content_type: "application/json")
+
+        expect { coveragestore_object.update(params) }.to raise_error(Geoserver::Publish::Error)
+      end
+    end
+  end
+
   describe "#delete" do
     context "with a 200 OK response" do
       let(:response) { "" }
