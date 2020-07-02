@@ -19,9 +19,9 @@ module Geoserver
         JSON.parse(out) if out
       end
 
-      def create(workspace_name:, coverage_store_name:, url:, type: "GeoTIFF")
+      def create(workspace_name:, coverage_store_name:, url:, type: "GeoTIFF", additional_payload: nil)
         path = coverage_store_url(workspace_name: workspace_name, coverage_store_name: nil)
-        payload = payload_new(workspace_name: workspace_name, coverage_store_name: coverage_store_name, url: url, type: type)
+        payload = payload_new(workspace_name: workspace_name, coverage_store_name: coverage_store_name, url: url, type: type, payload: additional_payload)
         connection.post(path: path, payload: payload)
       end
 
@@ -32,7 +32,7 @@ module Geoserver
           "workspaces/#{workspace_name}/coveragestores#{last_path_component}"
         end
 
-        def payload_new(workspace_name:, coverage_store_name:, type:, url:)
+        def payload_new(workspace_name:, coverage_store_name:, type:, url:, payload:)
           {
             coverageStore: {
               name: coverage_store_name,
@@ -43,7 +43,7 @@ module Geoserver
               },
               type: type,
               _default: false
-            }
+            }.merge(payload.to_h)
           }.to_json
         end
     end

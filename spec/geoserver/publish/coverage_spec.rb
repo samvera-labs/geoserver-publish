@@ -49,6 +49,28 @@ RSpec.describe Geoserver::Publish::Coverage do
         expect { coverage_object.create(params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
+
+    context "allows for custom payload parameters to be added to the request" do
+      let(:params) do
+        {
+          workspace_name: workspace_name,
+          coverage_store_name: coverage_store_name,
+          coverage_name: coverage_name,
+          title: title,
+          additional_payload: {
+            description: "Describe the coverage"
+          }
+        }
+      end
+
+      it "creates a Coverage with additional payload" do
+        new_payload = JSON.parse(payload)
+        new_payload["coverage"].merge!(params[:additional_payload])
+        stubbed = stub_geoserver_post(path: path, payload: new_payload.to_json, status: 201)
+        coverage_object.create(params)
+        expect(stubbed).to have_been_requested
+      end
+    end
   end
 
   describe "#delete" do

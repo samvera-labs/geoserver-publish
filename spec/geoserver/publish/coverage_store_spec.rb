@@ -46,6 +46,30 @@ RSpec.describe Geoserver::Publish::CoverageStore do
         expect { coveragestore_object.create(params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
+
+    context "allows for custom payload parameters to be added to the request" do
+      let(:params) do
+        {
+          workspace_name: workspace_name,
+          coverage_store_name: coverage_store_name,
+          url: url,
+          additional_payload: {
+            metadata: {
+              "cacheAgeMax" => 86_400,
+              "cachingEnabled" => true
+            }
+          }
+        }
+      end
+
+      it "creates a CoverageStore with additional payload" do
+        new_payload = JSON.parse(payload)
+        new_payload["coverageStore"].merge!(params[:additional_payload])
+        stubbed = stub_geoserver_post(path: path, payload: new_payload.to_json, status: 201)
+        coveragestore_object.create(params)
+        expect(stubbed).to have_been_requested
+      end
+    end
   end
 
   describe "#delete" do
