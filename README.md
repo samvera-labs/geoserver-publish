@@ -44,6 +44,16 @@ Geoserver::Publish.delete_geotiff(workspace_name: "public", id: "1234")
 Geoserver::Publish.delete_shapefile(workspace_name: "public", id: "1234")
 ```
 
+#### Styles
+
+For users wanting to publish styles, this can be done using the [GeoServer styles API](https://docs.geoserver.org/latest/en/api/#1.0.0/styles.yaml).
+
+```ruby
+Geoserver::Publish::Style.new.create(style_name: "raster_layer", filename: "raster_layer.sld")
+sld = File.read("./spec/fixtures/files/payload/raster_layer.sld")
+Geoserver::Publish::Style.new.update(style_name: "raster_layer", filename: "raster_layer.sld", payload: sld)
+```
+
 ## Configuration
 
 #### Default
