@@ -13,6 +13,7 @@ module Geoserver
     require "geoserver/publish/create"
     require "geoserver/publish/data_store"
     require "geoserver/publish/feature_type"
+    require "geoserver/publish/style"
     require "geoserver/publish/version"
     require "geoserver/publish/workspace"
 
