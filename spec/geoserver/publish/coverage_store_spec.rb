@@ -46,6 +46,68 @@ RSpec.describe Geoserver::Publish::CoverageStore do
         expect { coveragestore_object.create(params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
+
+    context "allows for custom payload parameters to be added to the request" do
+      let(:params) do
+        {
+          workspace_name: workspace_name,
+          coverage_store_name: coverage_store_name,
+          url: url,
+          additional_payload: {
+            metadata: {
+              "cacheAgeMax" => 86_400,
+              "cachingEnabled" => true
+            }
+          }
+        }
+      end
+
+      it "creates a CoverageStore with additional payload" do
+        new_payload = JSON.parse(payload)
+        new_payload["coverageStore"].merge!(params[:additional_payload])
+        stubbed = stub_geoserver_post(path: path, payload: new_payload.to_json, status: 201)
+        coveragestore_object.create(params)
+        expect(stubbed).to have_been_requested
+      end
+    end
+  end
+
+  describe "#update" do
+    let(:payload) { Fixtures.file_fixture("payload/coveragestore.json").read }
+    let(:params) do
+      {
+        workspace_name: workspace_name,
+        coverage_store_name: coverage_store_name,
+        url: url,
+        additional_payload: {
+          keywords: {
+            "string": ["coverage", "store"]
+          }
+        }
+      }
+    end
+
+    context "with a 200 OK response" do
+      it "makes a put request and returns true" do
+        new_payload = JSON.parse(payload)
+        new_payload["coverageStore"].merge!(params[:additional_payload])
+        stub_geoserver_put(payload: new_payload.to_json, path: path, status: 200, content_type: "application/json")
+
+        expect(coveragestore_object.update(params)).to be true
+      end
+    end
+
+    context "with a 404 not found response" do
+      let(:response) { "not found" }
+
+      it "makes an update request to geoserver and raises an exception" do
+        new_payload = JSON.parse(payload)
+        new_payload["coverageStore"].merge!(params[:additional_payload])
+        stub_geoserver_put(payload: new_payload.to_json, path: path, status: 404, content_type: "application/json")
+
+        expect { coveragestore_object.update(params) }.to raise_error(Geoserver::Publish::Error)
+      end
+    end
   end
 
   describe "#delete" do
