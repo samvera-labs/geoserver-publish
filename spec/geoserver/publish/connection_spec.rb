@@ -81,6 +81,16 @@ RSpec.describe Geoserver::Publish::Connection do
       end
     end
 
+    describe "has a configurable Content Type" do
+      before do
+        stub_geoserver_post(path: path, payload: payload, status: 201, content_type: "text/xml")
+      end
+
+      it "makes a post request to geoserver and returns true" do
+        expect(connection.post(path: path, payload: payload, content_type: "text/xml")).to be true
+      end
+    end
+
     context "with a 401 response, resource already exists" do
       before do
         stub_geoserver_post(path: path, payload: payload, status: 401)
