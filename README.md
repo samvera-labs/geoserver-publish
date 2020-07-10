@@ -54,6 +54,16 @@ sld = File.read("./spec/fixtures/files/payload/raster_layer.sld")
 Geoserver::Publish::Style.new.update(style_name: "raster_layer", filename: "raster_layer.sld", payload: sld)
 ```
 
+#### GeoWebCache
+
+The GeoWebCache REST API can also be used. Note: there is usually a different url that is used.
+
+```ruby
+c = Geoserver::Publish::Connection.new({"url" => "http://localhost:8080/geoserver/gwc/rest", "user"=>"admin",
+"password"=>"geoserver"})
+Geoserver::Publish::Geowebcache.new(c).masstruncate(layer_name: 'nurc:Pk50095')
+```
+
 ## Configuration
 
 #### Default
