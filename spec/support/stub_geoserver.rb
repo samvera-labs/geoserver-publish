@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 module GeoserverStubbing
-  def stub_geoserver_post(path:, payload:, status:)
+  def stub_geoserver_post(path:, payload:, status:, content_type: "application/json")
     stub_request(:post, path)
-      .with(body: payload, headers: { "Content-Type" => "application/json" })
+      .with(body: payload, headers: { "Content-Type" => content_type })
       .to_return(status: status, body: "response", headers: {})
   end
 

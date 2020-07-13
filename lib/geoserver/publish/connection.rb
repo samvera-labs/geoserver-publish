@@ -25,13 +25,13 @@ module Geoserver
         response.body if response.status == 200
       end
 
-      def post(path:, payload:)
+      def post(path:, payload:, content_type: "application/json")
         response = faraday_connection.post do |req|
           req.url path
-          req.headers["Content-Type"] = "application/json"
+          req.headers["Content-Type"] = content_type
           req.body = payload
         end
-        return true if response.status == 201 || response.status == 401
+        return true if response.status == 201 || response.status == 401 || response.status == 200
         raise Geoserver::Publish::Error, response.reason_phrase
       end
 
