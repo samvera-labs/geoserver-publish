@@ -25,9 +25,19 @@ module Geoserver
         connection.post(path: path, payload: payload)
       end
 
-      def upload(workspace_name:, data_store_name:, file:)
+      ##
+      # Upload a shapefile zip to a new datastore
+      # # @param workspace_name [String]
+      # # @param data_store_name [String]
+      # # @param file [String] Depending on value of method:
+      #     file == binary stream
+      #     url == URL to publicly available shapezip zip.
+      #     external == absolute path to existing file
+      # # @param method [String] Can be one of 'file', 'url', 'external'.
+      #     See: https://docs.geoserver.org/stable/en/api/#1.0.0/datastores.yaml
+      def upload(workspace_name:, data_store_name:, file:, method: 'file')
         content_type = 'application/zip'
-        path = upload_url(workspace: workspace_name, data_store: data_store_name)
+        path = upload_url(workspace: workspace_name, data_store: data_store_name, method: method)
         connection.put(path: path, payload: file, content_type: content_type)
       end
 
@@ -38,8 +48,8 @@ module Geoserver
           "workspaces/#{workspace_name}/datastores#{last_path_component}"
         end
 
-        def upload_url(workspace:, data_store:)
-          "workspaces/#{workspace}/datastores/#{data_store}/file.shp"
+        def upload_url(workspace:, data_store:, method:)
+          "workspaces/#{workspace}/datastores/#{data_store}/#{method}.shp"
         end
 
         # rubocop:disable Metrics/MethodLength
