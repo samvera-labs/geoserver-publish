@@ -99,7 +99,7 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
     end
   end
-  
+
   describe "#upload" do
     let(:path) { "#{base_url}/workspaces/public/datastores/datastore/file.shp" }
     let(:payload) { Fixtures.file_fixture("payload/antarctica-latest-free.shp.zip").read }
@@ -112,7 +112,18 @@ RSpec.describe Geoserver::Publish::DataStore do
       }
     end
 
-    context "when a datastore is created successfully" do
+    context "when a datastore is created using the url method" do
+      let(:path) { "#{base_url}/workspaces/public/datastores/datastore/url.shp" }
+      let(:payload) { "http://example.com/antarctica-latest-free.shp.zip" }
+      let(:params) do
+        {
+          workspace_name: workspace_name,
+          data_store_name: data_store_name,
+          file: payload,
+          method: 'url'
+        }
+    end
+
       before do
         stub_geoserver_put(path: path, payload: payload, content_type: content_type, status: 200)
       end
@@ -122,7 +133,17 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
     end
 
-    context "when a datastore is not created successfully" do
+    context "when a datastore is created using the file method" do
+      before do
+        stub_geoserver_put(path: path, payload: payload, content_type: content_type, status: 200)
+      end
+
+      it "returns true" do
+         expect(datastore_object.upload(params)).to be true
+      end
+    end
+
+    context "when a datastore is not created using the file method" do
       before do
         stub_geoserver_put(path: path, payload: payload, content_type: content_type, status: 500)
       end
