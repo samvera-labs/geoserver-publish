@@ -8,4 +8,5 @@
 /tmp/
 .byebug_history
 .rspec_status
+.tool-versions
 Gemfile.lock

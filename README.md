@@ -1,7 +1,7 @@
 # Geoserver::Publish
 
-[![Build Status](https://img.shields.io/travis/samvera-labs/geoserver-publish/master.svg)](https://travis-ci.org/samvera-labs/geoserver-publish)
-[![Coverage Status](https://img.shields.io/coveralls/samvera-labs/geoserver-publish/master.svg)](https://coveralls.io/github/samvera-labs/geoserver-publish?branch=master)
+[![Build Status](https://img.shields.io/travis/samvera-labs/geoserver-publish/main.svg)](https://travis-ci.org/samvera-labs/geoserver-publish)
+[![Coverage Status](https://img.shields.io/coveralls/samvera-labs/geoserver-publish/main.svg)](https://coveralls.io/github/samvera-labs/geoserver-publish?branch=main)
 
 Simple client for publishing Shapefiles and GeoTIFFs to Geoserver.
 
@@ -102,4 +102,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/samver
 
 If you're working on a PR for this project, create a feature branch off of `main`. 
 
-This repository follows the [Samvera Community Code of Conduct](https://samvera.atlassian.net/wiki/spaces/samvera/pages/405212316/Code+of+Conduct) and [language recommendations](https://github.com/samvera/maintenance/blob/master/templates/CONTRIBUTING.md#language).  Please ***do not*** create a branch called `master` for this repository or as part of your pull request; the branch will either need to be removed or renamed before it can be considered for inclusion in the code base and history of this repository.
+This repository follows the [Samvera Community Code of Conduct](https://samvera.atlassian.net/wiki/spaces/samvera/pages/405212316/Code+of+Conduct) and [language recommendations](https://github.com/samvera/maintenance/blob/main/templates/CONTRIBUTING.md#language).  Please ***do not*** create a branch called `master` for this repository or as part of your pull request; the branch will either need to be removed or renamed before it can be considered for inclusion in the code base and history of this repository.

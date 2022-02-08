@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "faraday"
+  spec.add_dependency "faraday", "~> 2.2"
 
   spec.add_development_dependency "bundler", "> 1.16.0", "< 3"
   spec.add_development_dependency "rake", "~> 10.0"
