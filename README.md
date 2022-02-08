@@ -1,7 +1,7 @@
 # Geoserver::Publish
 
-[![Build Status](https://img.shields.io/travis/samvera-labs/geoserver-publish/main.svg)](https://travis-ci.org/samvera-labs/geoserver-publish)
-[![Coverage Status](https://img.shields.io/coveralls/samvera-labs/geoserver-publish/main.svg)](https://coveralls.io/github/samvera-labs/geoserver-publish?branch=main)
+![CI](https://github.com/samvera-labs/geoserver-publish/actions/workflows/ruby.yml/badge.svg)
+[![Coverage Status](https://img.shields.io/badge/coverage-100%25-brightgreen)](https://github.com/samvera-labs/geoserver-publish/blob/da3eef51705eea8e3c14ff0b88aea70064b979d4/spec/spec_helper.rb#L13)
 
 Simple client for publishing Shapefiles and GeoTIFFs to Geoserver.
 
