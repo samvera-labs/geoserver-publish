@@ -111,11 +111,11 @@ RSpec.describe Geoserver::Publish::Connection do
       end
     end
   end
-  
+
   describe "#put" do
     let(:path) { "#{base_url}/workspaces/public.json" }
     let(:payload) { '{"workspace":{"name":"public","isolated":true}}' }
-    let(:content_type) { 'application/json' }
+    let(:content_type) { "application/json" }
 
     context "with a 200 updated response" do
       before do
@@ -123,7 +123,7 @@ RSpec.describe Geoserver::Publish::Connection do
       end
 
       it "makes a put request to geoserver and returns true" do
-        expect(connection.put(path: path, payload: payload, content_type: 'application/json')).to be true
+        expect(connection.put(path: path, payload: payload, content_type: "application/json")).to be true
       end
     end
 
@@ -133,7 +133,7 @@ RSpec.describe Geoserver::Publish::Connection do
       end
 
       it "makes a put request to geoserver and raises an exception" do
-        expect { connection.put(path: path, payload: payload, content_type: 'application/json') }.to raise_error(Geoserver::Publish::Error)
+        expect { connection.put(path: path, payload: payload, content_type: "application/json") }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end

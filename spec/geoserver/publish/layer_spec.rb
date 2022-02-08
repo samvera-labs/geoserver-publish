@@ -7,7 +7,6 @@ RSpec.describe Geoserver::Publish::Layer do
   let(:path) { "#{base_url}/layers/#{layer_name}" }
   let(:layer_name) { "foo" }
 
-
   describe "#delete" do
     context "with a 200 OK response" do
       let(:response) { "" }

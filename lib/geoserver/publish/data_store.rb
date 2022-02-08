@@ -35,47 +35,47 @@ module Geoserver
       #     external == absolute path to existing file
       # # @param method [String] Can be one of 'file', 'url', 'external'.
       #     See: https://docs.geoserver.org/stable/en/api/#1.0.0/datastores.yaml
-      def upload(workspace_name:, data_store_name:, file:, method: 'file')
-        content_type = 'application/zip'
+      def upload(workspace_name:, data_store_name:, file:, method: "file")
+        content_type = "application/zip"
         path = upload_url(workspace: workspace_name, data_store: data_store_name, method: method)
         connection.put(path: path, payload: file, content_type: content_type)
       end
 
       private
 
-        def data_store_url(workspace_name:, data_store_name:)
-          last_path_component = data_store_name ? "/#{data_store_name}" : ""
-          "workspaces/#{workspace_name}/datastores#{last_path_component}"
-        end
+      def data_store_url(workspace_name:, data_store_name:)
+        last_path_component = data_store_name ? "/#{data_store_name}" : ""
+        "workspaces/#{workspace_name}/datastores#{last_path_component}"
+      end
 
-        def upload_url(workspace:, data_store:, method:)
-          "workspaces/#{workspace}/datastores/#{data_store}/#{method}.shp"
-        end
+      def upload_url(workspace:, data_store:, method:)
+        "workspaces/#{workspace}/datastores/#{data_store}/#{method}.shp"
+      end
 
-        # rubocop:disable Metrics/MethodLength
-        def payload_new(data_store_name:, url:)
-          {
-            dataStore: {
-              name: data_store_name,
-              connectionParameters: {
-                entry: [
-                  {
-                    "@key": "create spatial index",
-                    "$": "true"
-                  },
-                  {
-                    "@key": "url",
-                    "$": url
-                  },
-                  {
-                    "@key": "cache and reuse memory maps",
-                    "$": "false"
-                  }
-                ]
-              }
+      # rubocop:disable Metrics/MethodLength
+      def payload_new(data_store_name:, url:)
+        {
+          dataStore: {
+            name: data_store_name,
+            connectionParameters: {
+              entry: [
+                {
+                  "@key": "create spatial index",
+                  "$": "true"
+                },
+                {
+                  "@key": "url",
+                  "$": url
+                },
+                {
+                  "@key": "cache and reuse memory maps",
+                  "$": "false"
+                }
+              ]
             }
-          }.to_json
-        end
+          }
+        }.to_json
+      end
       # rubocop:enable Metrics/MethodLength
     end
   end

@@ -6,7 +6,6 @@ RSpec.describe Geoserver::Publish::Geowebcache do
   let(:base_url) { "http://localhost:8080/geoserver/rest" }
   let(:layer_name) { "foo" }
 
-
   describe "#masstruncate" do
     let(:path) { "#{base_url}/masstruncate" }
     context "with a 200 OK response" do
