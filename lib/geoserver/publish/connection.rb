@@ -38,7 +38,7 @@ module Geoserver
       def put(path:, payload:, content_type:)
         response = faraday_connection.put do |req|
           req.url path
-          req.headers['Content-Type'] = content_type
+          req.headers["Content-Type"] = content_type
           req.body = payload
         end
         return true if response.status == 201 || response.status == 200
@@ -48,12 +48,12 @@ module Geoserver
 
       private
 
-        def faraday_connection
-          Faraday.new(url: config["url"]) do |conn|
-            conn.adapter Faraday.default_adapter
-            conn.basic_auth(config["user"], config["password"]) if config["user"]
-          end
+      def faraday_connection
+        Faraday.new(url: config["url"]) do |conn|
+          conn.adapter Faraday.default_adapter
+          conn.request(:authorization, :basic, config["user"], config["password"]) if config["user"]
         end
+      end
     end
   end
 end
