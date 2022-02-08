@@ -1,0 +1,42 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+    - name: Install dependencies
+      run: bundle install
+    - name: Run linter
+      run: bundle exec rubocop
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+
+    - name: Install bundler
+      run: gem install bundler -v 2.1.1
+
+    - name: Install dependencies
+      run: bundle _2.1.1_ install
+
+    - name: Run tests
+      run: bundle exec rake spec
+
+    - name: Upload coverage artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage
+        path: coverage/
