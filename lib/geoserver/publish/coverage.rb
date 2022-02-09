@@ -33,20 +33,20 @@ module Geoserver
 
       private
 
-        def coverage_url(workspace_name:, coverage_store_name:, coverage_name:)
-          last_path_component = coverage_name ? "/#{coverage_name}" : ""
-          "workspaces/#{workspace_name}/coveragestores/#{coverage_store_name}/coverages#{last_path_component}"
-        end
+      def coverage_url(workspace_name:, coverage_store_name:, coverage_name:)
+        last_path_component = coverage_name ? "/#{coverage_name}" : ""
+        "workspaces/#{workspace_name}/coveragestores/#{coverage_store_name}/coverages#{last_path_component}"
+      end
 
-        def payload_new(coverage_name:, title:, payload: nil)
-          {
-            coverage: {
-              enabled: true,
-              name: coverage_name,
-              title: title
-            }.merge(payload.to_h)
-          }.to_json
-        end
+      def payload_new(coverage_name:, title:, payload: nil)
+        {
+          coverage: {
+            enabled: true,
+            name: coverage_name,
+            title: title
+          }.merge(payload.to_h)
+        }.to_json
+      end
     end
   end
 end

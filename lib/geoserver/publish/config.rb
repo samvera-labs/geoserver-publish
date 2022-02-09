@@ -7,11 +7,11 @@ module Geoserver
 
     private
 
-      def config_yaml
-        file_path = File.join(Geoserver::Publish.root, "config", "config.yml")
-        YAML.safe_load(ERB.new(File.read(file_path)).result, [], [], true)
-      end
+    def config_yaml
+      file_path = File.join(Geoserver::Publish.root, "config", "config.yml")
+      YAML.safe_load(ERB.new(File.read(file_path)).result, [], [], true)
+    end
 
-      module_function :config, :config_yaml
+    module_function :config, :config_yaml
   end
 end

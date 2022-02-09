@@ -5,10 +5,13 @@ AllCops:
   TargetRubyVersion: 2.4
   Exclude:
     - 'bin/*'
+Lint/UnusedMethodArgument:
+  Exclude:
+    - "lib/geoserver/publish/style.rb"
 Metrics/BlockLength:
   Exclude:
-    - 'spec/**/*'
-    - '*.gemspec'
+    - "spec/**/*"
+    - "*.gemspec"
 Naming/FileName:
   Exclude: 
     - "geoserver-publish.gemspec"

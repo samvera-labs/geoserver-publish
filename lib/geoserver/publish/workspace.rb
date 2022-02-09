@@ -26,18 +26,18 @@ module Geoserver
 
       private
 
-        def payload_new(workspace_name:)
-          {
-            workspace: {
-              name: workspace_name
-            }
-          }.to_json
-        end
+      def payload_new(workspace_name:)
+        {
+          workspace: {
+            name: workspace_name
+          }
+        }.to_json
+      end
 
-        def workspace_url(workspace_name:)
-          last_path_component = workspace_name ? "/#{workspace_name}" : ""
-          "workspaces#{last_path_component}"
-        end
+      def workspace_url(workspace_name:)
+        last_path_component = workspace_name ? "/#{workspace_name}" : ""
+        "workspaces#{last_path_component}"
+      end
     end
   end
 end

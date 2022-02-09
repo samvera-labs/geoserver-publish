@@ -9,7 +9,7 @@ module Geoserver
       end
 
       def delete(layer_name:, workspace_name: nil)
-        path = layer_url(layer_name: layer_name, workspace_name: nil)
+        path = layer_url(layer_name: layer_name, workspace_name: workspace_name)
         connection.delete(path: path)
       end
 
@@ -27,13 +27,13 @@ module Geoserver
 
       private
 
-        def layer_url(layer_name:, workspace_name: nil)
-          path = []
-          path.push("workspaces", workspace_name) if workspace_name
-          path.push "layers"
-          path.push layer_name if layer_name
-          path.join("/")
-        end
+      def layer_url(layer_name:, workspace_name: nil)
+        path = []
+        path.push("workspaces", workspace_name) if workspace_name
+        path.push "layers"
+        path.push layer_name if layer_name
+        path.join("/")
+      end
     end
   end
 end

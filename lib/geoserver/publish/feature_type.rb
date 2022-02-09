@@ -35,20 +35,20 @@ module Geoserver
 
       private
 
-        def feature_type_url(workspace_name:, data_store_name:, feature_type_name:)
-          last_path_component = feature_type_name ? "/#{feature_type_name}" : ""
-          "workspaces/#{workspace_name}/datastores/#{data_store_name}/featuretypes#{last_path_component}"
-        end
+      def feature_type_url(workspace_name:, data_store_name:, feature_type_name:)
+        last_path_component = feature_type_name ? "/#{feature_type_name}" : ""
+        "workspaces/#{workspace_name}/datastores/#{data_store_name}/featuretypes#{last_path_component}"
+      end
 
-        def payload_new(feature_type_name:, title:, payload:)
-          {
-            featureType: {
-              name: feature_type_name,
-              title: title,
-              enabled: true
-            }.merge(payload.to_h)
-          }.to_json
-        end
+      def payload_new(feature_type_name:, title:, payload:)
+        {
+          featureType: {
+            name: feature_type_name,
+            title: title,
+            enabled: true
+          }.merge(payload.to_h)
+        }.to_json
+      end
     end
   end
 end

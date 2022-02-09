@@ -103,7 +103,7 @@ RSpec.describe Geoserver::Publish::DataStore do
   describe "#upload" do
     let(:path) { "#{base_url}/workspaces/public/datastores/datastore/file.shp" }
     let(:payload) { Fixtures.file_fixture("payload/antarctica-latest-free.shp.zip").read }
-    let(:content_type) { 'application/zip' }
+    let(:content_type) { "application/zip" }
     let(:params) do
       {
         workspace_name: workspace_name,
@@ -120,16 +120,16 @@ RSpec.describe Geoserver::Publish::DataStore do
           workspace_name: workspace_name,
           data_store_name: data_store_name,
           file: payload,
-          method: 'url'
+          method: "url"
         }
-    end
+      end
 
       before do
         stub_geoserver_put(path: path, payload: payload, content_type: content_type, status: 200)
       end
 
       it "returns true" do
-         expect(datastore_object.upload(params)).to be true
+        expect(datastore_object.upload(params)).to be true
       end
     end
 
@@ -139,7 +139,7 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
 
       it "returns true" do
-         expect(datastore_object.upload(params)).to be true
+        expect(datastore_object.upload(params)).to be true
       end
     end
 

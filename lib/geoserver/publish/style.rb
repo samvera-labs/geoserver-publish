@@ -40,19 +40,19 @@ module Geoserver
 
       private
 
-        def style_url(style_name:)
-          last_path_component = style_name ? "/#{style_name}" : ""
-          "styles#{last_path_component}"
-        end
+      def style_url(style_name:)
+        last_path_component = style_name ? "/#{style_name}" : ""
+        "styles#{last_path_component}"
+      end
 
-        def payload_new(style_name:, filename:, payload: nil)
-          {
-            style: {
-              name: style_name,
-              filename: filename,
-            }.merge(payload.to_h)
-          }.to_json
-        end
+      def payload_new(style_name:, filename:, payload: nil)
+        {
+          style: {
+            name: style_name,
+            filename: filename
+          }.merge(payload.to_h)
+        }.to_json
+      end
     end
   end
 end
