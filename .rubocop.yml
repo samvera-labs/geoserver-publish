@@ -2,7 +2,7 @@ inherit_gem:
   bixby: bixby_default.yml
 AllCops:
   DisplayCopNames: true
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.7
   Exclude:
     - 'bin/*'
 Lint/UnusedMethodArgument:
@@ -13,7 +13,7 @@ Metrics/BlockLength:
     - "spec/**/*"
     - "*.gemspec"
 Naming/FileName:
-  Exclude: 
+  Exclude:
     - "geoserver-publish.gemspec"
     - "Gemfile"
 Style/StringLiterals:

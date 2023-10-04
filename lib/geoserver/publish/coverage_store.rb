@@ -31,11 +31,46 @@ module Geoserver
         connection.put(path: path, payload: payload, content_type: "application/json")
       end
 
+      ##
+      # Upload raster data files to a new coverage store
+      # # @param workspace_name [String]
+      # # @param coverage_store_name [String]
+      # # @param format [String] One of:
+      #     geotiff == GeoTIFF
+      #     worldimage == Georeferenced image (JPEG, PNG, TIFF)
+      #     imagemosaic == Image mosaic
+      #     See: https://docs.geoserver.org/stable/en/user/rest/api/coveragestores.html#extension
+      # # @param file [String] Depending on value of method:
+      #     file == binary stream
+      #     url == URL to publicly available raster files (DOESN'T ACTUALLY WORK).
+      #     external == absolute path to existing file
+      # # @param content_type [String] Content-Type for file upload
+      # # @param method [String] Can be one of 'file', 'url', 'external'.
+      #     See: https://docs.geoserver.org/latest/en/api/#1.0.0/coveragestores.yaml
+      # rubocop:disable Metrics/ParameterLists
+      def upload(workspace_name:, coverage_store_name:, format:, file:, method: "file", content_type: "application/zip")
+        path = upload_url(
+          workspace_name: workspace_name,
+          coverage_store_name: coverage_store_name,
+          method: method,
+          format: format
+        )
+
+        connection.put(path: path, payload: file, content_type: content_type)
+      end
+      # rubocop:enable Metrics/ParameterLists
+
       private
 
       def coverage_store_url(workspace_name:, coverage_store_name:)
         last_path_component = coverage_store_name ? "/#{coverage_store_name}" : ""
         "workspaces/#{workspace_name}/coveragestores#{last_path_component}"
+      end
+
+      # see: https://docs.geoserver.org/latest/en/api/#1.0.0/coveragestores.yaml
+      # /workspaces/{workspace}/coveragestores/{store}/{method}.{format}
+      def upload_url(workspace_name:, coverage_store_name:, method:, format:)
+        "workspaces/#{workspace_name}/coveragestores/#{coverage_store_name}/#{method}.#{format}?coverageName=#{coverage_store_name}"
       end
 
       def payload_new(workspace_name:, coverage_store_name:, type:, url:, payload:)
