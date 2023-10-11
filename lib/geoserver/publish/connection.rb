@@ -29,6 +29,7 @@ module Geoserver
         response = faraday_connection.post do |req|
           req.url path
           req.headers["Content-Type"] = content_type
+          req.headers["Content-Length"] = (payload.length || payload.size || 0).to_s
           req.body = payload
         end
         return true if response.status == 201 || response.status == 401 || response.status == 200
@@ -39,6 +40,7 @@ module Geoserver
         response = faraday_connection.put do |req|
           req.url path
           req.headers["Content-Type"] = content_type
+          req.headers["Content-Length"] = (payload.length || payload.size || 0).to_s
           req.body = payload
         end
         return true if response.status == 201 || response.status == 200
