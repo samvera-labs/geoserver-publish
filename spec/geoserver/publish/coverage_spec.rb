@@ -36,7 +36,7 @@ RSpec.describe Geoserver::Publish::Coverage do
       end
 
       it "returns a true" do
-        expect(coverage_object.create(params)).to be true
+        expect(coverage_object.create(**params)).to be true
       end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe Geoserver::Publish::Coverage do
       end
 
       it "raises an error" do
-        expect { coverage_object.create(params) }.to raise_error(Geoserver::Publish::Error)
+        expect { coverage_object.create(**params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
 
@@ -67,7 +67,7 @@ RSpec.describe Geoserver::Publish::Coverage do
         new_payload = JSON.parse(payload)
         new_payload["coverage"].merge!(params[:additional_payload])
         stubbed = stub_geoserver_post(path: path, payload: new_payload.to_json, status: 201)
-        coverage_object.create(params)
+        coverage_object.create(**params)
         expect(stubbed).to have_been_requested
       end
     end
@@ -95,7 +95,7 @@ RSpec.describe Geoserver::Publish::Coverage do
         new_payload["coverage"].merge!(params[:additional_payload])
         stub_geoserver_put(payload: new_payload.to_json, path: path, status: 200, content_type: "application/json")
 
-        expect(coverage_object.update(params)).to be true
+        expect(coverage_object.update(**params)).to be true
       end
     end
 
@@ -107,7 +107,7 @@ RSpec.describe Geoserver::Publish::Coverage do
         new_payload["coverage"].merge!(params[:additional_payload])
         stub_geoserver_put(payload: new_payload.to_json, path: path, status: 404, content_type: "application/json")
 
-        expect { coverage_object.update(params) }.to raise_error(Geoserver::Publish::Error)
+        expect { coverage_object.update(**params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
@@ -121,7 +121,7 @@ RSpec.describe Geoserver::Publish::Coverage do
       end
 
       it "makes a delete request and returns true" do
-        expect(coverage_object.delete(params)).to be true
+        expect(coverage_object.delete(**params)).to be true
       end
     end
 
@@ -133,7 +133,7 @@ RSpec.describe Geoserver::Publish::Coverage do
       end
 
       it "makes a delete request to geoserver and raises an exception" do
-        expect { coverage_object.delete(params) }.to raise_error(Geoserver::Publish::Error)
+        expect { coverage_object.delete(**params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
@@ -147,7 +147,7 @@ RSpec.describe Geoserver::Publish::Coverage do
       end
 
       it "returns a the properties as a hash" do
-        expect(coverage_object.find(params)).to eq(JSON.parse(response))
+        expect(coverage_object.find(**params)).to eq(JSON.parse(response))
       end
     end
 
@@ -159,7 +159,7 @@ RSpec.describe Geoserver::Publish::Coverage do
       end
 
       it "returns nil" do
-        expect(coverage_object.find(params)).to be_nil
+        expect(coverage_object.find(**params)).to be_nil
       end
     end
   end
