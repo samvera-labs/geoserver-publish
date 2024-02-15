@@ -36,7 +36,7 @@ RSpec.describe Geoserver::Publish::FeatureType do
       end
 
       it "returns a true" do
-        expect(feature_type_object.create(params)).to be true
+        expect(feature_type_object.create(**params)).to be true
       end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe Geoserver::Publish::FeatureType do
       end
 
       it "raises an exception" do
-        expect { feature_type_object.create(params) }.to raise_error(Geoserver::Publish::Error)
+        expect { feature_type_object.create(**params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
 
@@ -70,7 +70,7 @@ RSpec.describe Geoserver::Publish::FeatureType do
         new_payload = JSON.parse(payload)
         new_payload["featureType"].merge!(params[:additional_payload])
         stubbed = stub_geoserver_post(path: path, payload: new_payload.to_json, status: 201)
-        feature_type_object.create(params)
+        feature_type_object.create(**params)
         expect(stubbed).to have_been_requested
       end
     end
@@ -99,7 +99,7 @@ RSpec.describe Geoserver::Publish::FeatureType do
         new_payload["featureType"].merge!(params[:additional_payload])
         stub_geoserver_put(payload: new_payload.to_json, path: path, status: 200, content_type: "application/json")
 
-        expect(feature_type_object.update(params)).to be true
+        expect(feature_type_object.update(**params)).to be true
       end
     end
 
@@ -111,7 +111,7 @@ RSpec.describe Geoserver::Publish::FeatureType do
         new_payload["featureType"].merge!(params[:additional_payload])
         stub_geoserver_put(payload: new_payload.to_json, path: path, status: 404, content_type: "application/json")
 
-        expect { feature_type_object.update(params) }.to raise_error(Geoserver::Publish::Error)
+        expect { feature_type_object.update(**params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
@@ -125,7 +125,7 @@ RSpec.describe Geoserver::Publish::FeatureType do
       end
 
       it "makes a delete request and returns true" do
-        expect(feature_type_object.delete(params)).to be true
+        expect(feature_type_object.delete(**params)).to be true
       end
     end
 
@@ -137,7 +137,7 @@ RSpec.describe Geoserver::Publish::FeatureType do
       end
 
       it "makes a delete request to geoserver and raises an exception" do
-        expect { feature_type_object.delete(params) }.to raise_error(Geoserver::Publish::Error)
+        expect { feature_type_object.delete(**params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
@@ -151,7 +151,7 @@ RSpec.describe Geoserver::Publish::FeatureType do
       end
 
       it "returns a the properties as a hash" do
-        expect(feature_type_object.find(params)).to eq(JSON.parse(response))
+        expect(feature_type_object.find(**params)).to eq(JSON.parse(response))
       end
     end
 
@@ -163,7 +163,7 @@ RSpec.describe Geoserver::Publish::FeatureType do
       end
 
       it "returns nil" do
-        expect(feature_type_object.find(params)).to be_nil
+        expect(feature_type_object.find(**params)).to be_nil
       end
     end
   end

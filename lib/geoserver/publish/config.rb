@@ -10,7 +10,12 @@ module Geoserver
     # :nocov:
     def config_yaml
       file_path = File.join(Geoserver::Publish.root, "config", "config.yml")
-      YAML.safe_load(ERB.new(File.read(file_path)).result, [], [], true)
+      yaml_text = ERB.new(File.read(file_path)).result
+      if Gem::Version.new(Psych::VERSION) >= Gem::Version.new("3.1.0.pre1")
+        YAML.safe_load(yaml_text, aliases: true)
+      else
+        YAML.safe_load(yaml_text, [], [], true)
+      end
     end
     # :nocov:
 

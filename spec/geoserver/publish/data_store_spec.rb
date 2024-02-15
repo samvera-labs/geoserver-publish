@@ -33,7 +33,7 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
 
       it "returns true" do
-        expect(datastore_object.create(params)).to be true
+        expect(datastore_object.create(**params)).to be true
       end
     end
 
@@ -43,7 +43,7 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
 
       it "raises an exception" do
-        expect { datastore_object.create(params) }.to raise_error(Geoserver::Publish::Error)
+        expect { datastore_object.create(**params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
@@ -57,7 +57,7 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
 
       it "makes a delete request and returns true" do
-        expect(datastore_object.delete(params)).to be true
+        expect(datastore_object.delete(**params)).to be true
       end
     end
 
@@ -69,7 +69,7 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
 
       it "makes a delete request to geoserver and raises an exception" do
-        expect { datastore_object.delete(params) }.to raise_error(Geoserver::Publish::Error)
+        expect { datastore_object.delete(**params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
@@ -83,7 +83,7 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
 
       it "returns the properties as a hash" do
-        expect(datastore_object.find(params)).to eq(JSON.parse(response))
+        expect(datastore_object.find(**params)).to eq(JSON.parse(response))
       end
     end
 
@@ -95,7 +95,7 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
 
       it "returns nil" do
-        expect(datastore_object.find(params)).to be_nil
+        expect(datastore_object.find(**params)).to be_nil
       end
     end
   end
@@ -129,7 +129,7 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
 
       it "returns true" do
-        expect(datastore_object.upload(params)).to be true
+        expect(datastore_object.upload(**params)).to be true
       end
     end
 
@@ -139,7 +139,7 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
 
       it "returns true" do
-        expect(datastore_object.upload(params)).to be true
+        expect(datastore_object.upload(**params)).to be true
       end
     end
 
@@ -149,7 +149,7 @@ RSpec.describe Geoserver::Publish::DataStore do
       end
 
       it "raises an exception" do
-        expect { datastore_object.upload(params) }.to raise_error(Geoserver::Publish::Error)
+        expect { datastore_object.upload(**params) }.to raise_error(Geoserver::Publish::Error)
       end
     end
   end
